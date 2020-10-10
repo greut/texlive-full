@@ -1,5 +1,8 @@
-# Use ubuntu eoan as parent image
-FROM ubuntu:eoan
+# Use ubuntu focal as parent image
+FROM ubuntu:focal
+
+SHELL ["/bin/sh", "-x", "-e", "-c"]
+
 # Set maintainer
 LABEL maintainer="Laurens Sion <laurens@sion.info>"
 
@@ -7,9 +10,15 @@ LABEL maintainer="Laurens Sion <laurens@sion.info>"
 WORKDIR /data
 VOLUME /data
 
+ENV DEBIAN_FRONTEND=noninteractive
 # Update and install texlive-full
-RUN apt-get update -q && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -qy texlive-full make git openjdk-8-jre-headless rubber scons && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* 
-
+RUN apt-get update -q \
+ && apt-get install -qy --no-install-recommends \
+        texlive-full \
+        make \
+        git \
+        openjdk-8-jre-headless \
+        rubber \
+        scons \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
