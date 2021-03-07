@@ -14,11 +14,19 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Update and install texlive-full
 RUN apt-get update -q \
  && apt-get install -qy --no-install-recommends \
-        texlive-full \
-        make \
+        curl \
+        fonts-croscore \
+        fonts-crosextra-carlito \
+        fonts-inconsolata \
+        fonts-texgyre \
         git \
+        lmodern \
+        make \
         openjdk-8-jre-headless \
         rubber \
         scons \
+        tex-gyre \
+        texlive-full \
+        xz-utils \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
